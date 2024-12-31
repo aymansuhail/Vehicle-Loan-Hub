@@ -1,0 +1,60 @@
+<div class="background">
+  <div class="container my-3 ">
+    <div class="card shadow p-3 mb-2 bg-white rounded">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h2 class="my-2">Edit Loan</h2>
+        <button type="button" class="btn btn-primary btn-sm" routerLink="/admin/viewloans">Back</button>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="editLoanForm" (ngSubmit)="openConfirmationModal()" class="form-group">
+          <label for="loanType">Loan Type</label>
+          <input type="text" id="loanType" class="form-control form-control-sm" formControlName="loanType" placeholder="Enter loan type">
+          <div *ngIf="editLoanForm.controls.loanType.touched || (editLoanForm.controls.loanType.dirty && editLoanForm.controls.loanType.invalid)" class="text-danger">
+            <small *ngIf="editLoanForm.controls.loanType.errors?.required">Loan Type is required.</small>
+          </div>
+
+          <label for="description">Description</label>
+          <textarea id="description" class="form-control form-control-sm" formControlName="description" placeholder="Enter description"></textarea>
+          <div *ngIf="editLoanForm.controls.description.touched || (editLoanForm.controls.description.dirty && editLoanForm.controls.description.invalid)" class="text-danger">
+            <small *ngIf="editLoanForm.controls.description.errors?.required">Description is required.</small>
+          </div>
+
+          <label for="interestRate">Interest Rate</label>
+          <input type="number" id="interestRate" class="form-control form-control-sm" formControlName="interestRate" placeholder="Enter interest rate">
+          <div *ngIf="editLoanForm.controls.interestRate.touched || (editLoanForm.controls.interestRate.dirty && editLoanForm.controls.interestRate.invalid)" class="text-danger">
+            <small *ngIf="editLoanForm.controls.interestRate.errors?.required">Interest Rate is required.</small>
+            <small *ngIf="editLoanForm.controls.interestRate.errors?.min">Interest Rate must be a positive number.</small>
+          </div>
+
+          <label for="maximumAmount">Maximum Amount</label>
+          <input type="number" id="maximumAmount" class="form-control form-control-sm" formControlName="maximumAmount" placeholder="Enter maximum amount">
+          <div *ngIf="editLoanForm.controls.maximumAmount.touched || (editLoanForm.controls.maximumAmount.dirty && editLoanForm.controls.maximumAmount.invalid)" class="text-danger">
+            <small *ngIf="editLoanForm.controls.maximumAmount.errors?.required">Maximum Amount is required.</small>
+            <small *ngIf="editLoanForm.controls.maximumAmount.errors?.min">Maximum Amount must be a positive number.</small>
+          </div>
+          <br>
+          <button type="submit" class="btn btn-primary btn-sm" [disabled]="!editLoanForm.valid">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmationModalLabel">Confirm Loan Edit</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p id="confirmationMessage">Are you sure you want to edit this loan?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">No</button>
+        <button type="button" class="btn btn-warning btn-sm" (click)="confirmEditLoan()">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,124 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Ensure the container stretches at least to the viewport height */
+    padding: 20px; /* Added padding for better spacing */
+  }
+  
+  .registration-box {
+    width: 100%;
+    max-width: 400px;
+    padding: 15px;
+    margin-top: 60px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .registration-box h1 {
+    text-align: center;
+    margin-bottom: 2px;
+  }
+  
+  .error {
+    color: red;
+    font-size: 12px;
+  }
+  
+  button:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+  
+  .alert {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .alert-success {
+    border: 1px solid green;
+  }
+  
+  .alert-danger {
+    border: 1px solid red;
+  }
+  
+  .login-container {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .login-link {
+    color: #FF5733;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .login-link:hover {
+    text-decoration: underline;
+  }
+  
+  .backgroundImage {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    overflow: auto; /* Enable scrolling */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .backgroundImage::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('https://img.freepik.com/free-vector/car-finance-concept-illustration_114360-8058.jpg?t=st=1734949034~exp=1734952634~hmac=f1bd51148c257bb41e7320241b984111592e51d48b6992ab887fce53c673d063&w=826');
+    background-size: cover;
+    background-position: center;
+    filter: blur(2px);
+    z-index: -1;
+  }
+  
+  .styled-button {
+    background-color: #FF725C;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .styled-button:hover {
+    background-color: #FF5733;
+    transform: scale(1.05);
+  }
+  
+  .styled-button:disabled {
+    background-color: #ffb9a9;
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+  
+  /* Responsive Styling */
+  @media (max-width: 768px) {
+    .registration-box {
+      width: 90%;
+      padding: 10px;
+    }
+  
+    .styled-button {
+      font-size: 0.8rem;
+    }
+  
+    .error {
+      font-size: 10px;
+    }
+  }
+  

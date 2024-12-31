@@ -1,0 +1,21 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="collapse navbar-collapse" id="adminNavbar">
+    <ul class="navbar-nav ml-auto d-flex align-items-center">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="loanDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Loan
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="loanDropdown">
+          <li><a class="dropdown-item" routerLink="/admin/createloans">Add Loan</a></li>
+          <li><a class="dropdown-item" routerLink="/admin/viewloans">View Loans</a></li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/admin/requestedloan">Requested Loan</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/admin/viewfeedbacks">View Feedbacks</a>
+      </li>
+    </ul>
+  </div>
+</nav>

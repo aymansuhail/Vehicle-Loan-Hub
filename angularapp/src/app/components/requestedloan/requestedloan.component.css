@@ -1,0 +1,110 @@
+.loan-form-container {
+  background-size: cover;
+  background-position: center;
+  padding: 50px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.background {
+  background-image: url('https://img.freepik.com/free-vector/car-finance-concept-illustration_114360-8058.jpg?t=st=1734949034~exp=1734952634~hmac=f1bd51148c257bb41e7320241b984111592e51d48b6992ab887fce53c673d063&w=826');
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+  height: 100vh;
+  padding-top: 20px; /* Reduced padding */
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border: 1px solid black;
+}
+
+.card-header {
+  background-color: #FF725C;
+  color: white;
+  border-radius: 15px 15px 0 0;
+  font-weight: bold;
+}
+
+.btn-primary {
+  background-color: #e18164;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #FF725C;
+}
+
+.btn-info {
+  background-color: #e64a19;
+  border: none;
+}
+
+.btn-info:hover {
+  background-color: #FF725C;
+}
+
+.btn-secondary {
+  background-color: black;
+  color: white;
+  border: none;
+}
+
+.btn-secondary:hover {
+  background-color: #e64a19;
+}
+
+.modal-backdrop {
+  filter: blur(5px);
+}
+
+#headings h2 {
+  width: fit-content;
+  background-color: white;
+  font-weight: bold;
+  color: #FF725C;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  margin: 0; /* Removed extra margin */
+  display: inline-block; /* Shrink to fit content */
+  font-size: 1.5rem; /* Reduced font size */
+}
+
+.table th, .table td {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.table .btn {
+  margin: 0 5px;
+}
+
+.table-responsive {
+  overflow-x: auto;
+  margin-top: 10px; /* Reduced margin */
+}
+
+.search-filter-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.search-filter-container .form-control {
+  width: 48%;
+  font-size: 0.875rem;
+}
+
+input[type="text"]::placeholder {
+  font-style: italic;
+  color: black;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.alert-danger {
+  margin-top: 20px;
+}

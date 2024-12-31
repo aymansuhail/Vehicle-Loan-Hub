@@ -1,0 +1,106 @@
+.backgroundImage {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .backgroundImage::before, .backgroundImageBlur::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('https://img.freepik.com/free-vector/car-finance-concept-illustration_114360-8058.jpg?t=st=1734949034~exp=1734952634~hmac=f1bd51148c257bb41e7320241b984111592e51d48b6992ab887fce53c673d063&w=826');
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+  }
+  
+  .backgroundImageBlur::before, .blur {
+    filter: blur(5px); /* Increased blur effect */
+  }
+  
+  .no-scroll {
+    overflow: hidden !important;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .login-box {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+  
+  .login-box h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .form-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .error {
+    color: red;
+    font-size: 12px;
+  }
+  
+  .register-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .register-link {
+    color: #FF725C;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .register-link:hover {
+    text-decoration: underline;
+  }
+  
+  .spinner-border {
+    margin-left: 10px;
+  }
+  
+  .styled-button {
+    background-color: #FF725C;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .styled-button:hover {
+    background-color: #FF5733;
+    transform: scale(1.05);
+  }
+  
+  .styled-button:disabled {
+    background-color: #ffb9a9;
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+  

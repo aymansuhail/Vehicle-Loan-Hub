@@ -1,0 +1,63 @@
+<div class="background">
+  <div class="container mt-3 loan-form-container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">
+            <h2>Create New Loan</h2>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="createLoanForm" (ngSubmit)="openConfirmationModal()" class="form-group">
+              <label for="loanType">Loan Type</label>
+              <input type="text" id="loanType" class="form-control" formControlName="loanType" placeholder="Enter loan type">
+              <div *ngIf="createLoanForm.controls.loanType.touched || createLoanForm.controls.loanType.dirty && createLoanForm.controls.loanType.invalid" class="text-danger">
+                <small *ngIf="createLoanForm.controls.loanType.errors?.required">Loan Type is required.</small>
+              </div>
+  
+              <label for="description">Description</label>
+              <textarea id="description" class="form-control" formControlName="description" placeholder="Enter description"></textarea>
+              <div *ngIf="createLoanForm.controls.description.touched || createLoanForm.controls.description.dirty && createLoanForm.controls.description.invalid" class="text-danger">
+                <small *ngIf="createLoanForm.controls.description.errors?.required">Description is required.</small>
+              </div>
+  
+              <label for="interestRate">Interest Rate</label>
+              <input type="number" id="interestRate" class="form-control" formControlName="interestRate" placeholder="Enter interest rate">
+              <div *ngIf="createLoanForm.controls.interestRate.touched || createLoanForm.controls.interestRate.dirty && createLoanForm.controls.interestRate.invalid" class="text-danger">
+                <small *ngIf="createLoanForm.controls.interestRate.errors?.required">Interest Rate is required.</small>
+                <small *ngIf="createLoanForm.controls.interestRate.errors?.min">Interest Rate must be a positive number.</small>
+              </div>
+  
+              <label for="maximumAmount">Maximum Amount</label>
+              <input type="number" id="maximumAmount" class="form-control" formControlName="maximumAmount" placeholder="Enter maximum amount">
+              <div *ngIf="createLoanForm.controls.maximumAmount.touched || createLoanForm.controls.maximumAmount.dirty && createLoanForm.controls.maximumAmount.invalid" class="text-danger">
+                <small *ngIf="createLoanForm.controls.maximumAmount.errors?.required">Maximum Amount is required.</small>
+                <small *ngIf="createLoanForm.controls.maximumAmount.errors?.min">Maximum Amount must be a positive number.</small>
+              </div>
+              <br>
+              <button type="submit" class="btn btn-warning" [disabled]="!createLoanForm.valid">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmationModalLabel">Confirm Loan Creation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p id="confirmationMessage">Are you sure you want to create this loan?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        <button type="button" class="btn btn-warning" (click)="confirmCreateLoan()">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,85 @@
+<div class="background">
+  <div class="container my-4">
+    <div class="card shadow p-3 mb-4 bg-white rounded">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="my-2 heading">Available Vehicle Loans</h2>
+        <input type="text" class="form-control search-input ml-auto" placeholder="Search for loan.." [(ngModel)]="searchTerm" style="max-width: 200px;">
+      </div>
+      <div id="table" class="table-responsive">
+        <!-- Loader -->
+        <div *ngIf="loading" class="text-center">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+        
+        <!-- Error Message -->
+        <div *ngIf="errorMessage" class="alert alert-danger text-center">
+          {{ errorMessage }}
+        </div>
+
+        <!-- No Records Found -->
+        <div *ngIf="!loading && !errorMessage && allLoans.length === 0" class="text-center">
+          <p>No Records Found</p>
+        </div>
+
+        <!-- Loans Table -->
+        <table *ngIf="!loading && !errorMessage && allLoans.length > 0" class="table table-sm table-striped table-hover table-bordered">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">S.No</th>
+              <th scope="col">Loan Type</th>
+              <th scope="col">Loan Description</th>
+              <th scope="col">Interest Rate</th>
+              <th scope="col" (click)="sortLoansByAmount()" style="cursor: pointer;">
+                Maximum Amount 
+                <svg *ngIf="sortDirection" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5"/>
+                </svg>
+                <svg *ngIf="!sortDirection" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1"/>
+                </svg>
+              </th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let loan of allLoans | searchLoan: searchTerm; let i = index">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{ loan.loanType }}</td>
+              <td>
+                <span *ngIf="loan.description.length > 50">{{ loan.description | slice:0:50 }}...</span>
+                <span *ngIf="loan.description.length <= 50">{{ loan.description }}</span>
+              </td>
+              <td>{{ loan.interestRate }}%</td>
+              <td>{{ loan.maximumAmount | currency }}</td>
+              <td>
+                <span *ngIf="loan.applied">Applied</span>
+                <button class="btn btn-secondary btn-sm" (click)="viewFullDescription(loan.loanId)">View Full Description</button>
+                <button class="btn btn-primary btn-sm" *ngIf="!loan.applied" (click)="applyLoan(loan)">Apply</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Full Description Modal -->
+<div class="modal fade" id="fullDescriptionModal" tabindex="-1" aria-labelledby="fullDescriptionModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="fullDescriptionModalLabel">Full Description</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+      </div>
+      <div class="modal-body">
+        <p>{{ selectedLoanDescription }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,75 @@
+.navbar {
+  background-color: #343a40;
+  height: 0%; /* Set height to 20% */
+  padding: 0%;
+}
+
+.nav-link {
+  color: white !important;
+  font-size: 10px;
+}
+
+.nav-link:hover {
+  color: #FF725C !important;
+}
+
+.btn-warning.nav-link {
+  color: white !important;
+  background-color: #FF725C !important;
+  border: none;
+  font-size: 10px;
+}
+
+.btn-warning.nav-link:hover {
+  background-color: #e64a19 !important;
+}
+
+.navbar .navbar-nav .nav-item {
+  margin-left: 10px;
+}
+
+/* Dropdown Styling */
+.nav-item.dropdown:hover .dropdown-menu {
+  display: block;
+  margin-top: 0;
+  background-color: #343a40; /* Same as navbar background */
+  border: none;
+  border-radius: 0;
+}
+
+.dropdown-menu {
+  transition: all 0.3s ease;
+}
+
+.dropdown-item {
+  color: white !important;
+  padding: 5px 10px; /* Reduced padding */
+  font-size: 8px; /* Reduced font size */
+}
+
+.dropdown-item:hover {
+  background-color: #FF725C !important;
+  color: white !important;
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* Ensure Navbar is Responsive */
+@media (max-width: 991.98px) {
+  .navbar-brand svg {
+    height: 30px;
+  }
+
+  .nav-link {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .navbar-brand svg {
+    height: 25px;
+  }
+
+  .nav-link {
+    font-size: 12px;
+  }
+}

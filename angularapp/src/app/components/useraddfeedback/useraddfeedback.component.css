@@ -1,0 +1,68 @@
+.loan-form-container {
+    background-size: cover;
+    background-position: center;
+    padding: 50px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .background {
+    background-image: url('https://img.freepik.com/free-vector/car-finance-concept-illustration_114360-8058.jpg?t=st=1734949034~exp=1734952634~hmac=f1bd51148c257bb41e7320241b984111592e51d48b6992ab887fce53c673d063&w=826');
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+    height: 100vh;
+    padding-top: 0; /* Remove padding at the top */
+    margin-top: 0; /* Remove any margin at the top */
+  }
+  
+  .card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-header {
+    background-color: #FF725C;
+    color: white;
+    border-radius: 15px 15px 0 0;
+  }
+  
+  .btn-warning {
+    background-color: #FF725C;
+    border: none;
+  }
+  
+  .btn-warning:hover {
+    background-color: #e64a19;
+  }
+  
+  .btn-secondary {
+    background-color: black;
+    color: white;
+    border: none;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #e64a19;
+  }
+  
+  .modal-backdrop {
+    filter: blur(5px);
+  }
+  
+  body {
+    margin: 0; /* Ensure there is no margin around the body */
+  }
+  
+  html {
+    margin: 0; /* Ensure there is no margin around the html */
+  }
+  
+  .container {
+    padding-top: 0; /* Remove padding at the top */
+    margin-top: 0; /* Remove margin at the top */
+  }
+  .blur { 
+    filter: blur(5px); transition: filter 0.3s ease-in-out;
+  }

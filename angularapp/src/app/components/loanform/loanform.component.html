@@ -1,0 +1,97 @@
+<div class="background">
+  <div class="container d-flex justify-content-center mt-4 align-items-center vh-100">
+    <div class="loanform-box w-50 p-1">
+      <h1 class="text-center mb-1">Loan Application Form</h1>
+      <form [formGroup]="loanForm" (ngSubmit)="openConfirmationModal()" class="needs-validation" novalidate>
+        
+        <div class="mb-2">
+          <label for="income" class="form-label">Income</label>
+          <input type="number" class="form-control" id="income" formControlName="income" required>
+          <div *ngIf="loanForm.controls.income?.invalid && (loanForm.controls.income.dirty || loanForm.controls.income.touched)" class="text-danger">
+            <small *ngIf="loanForm.controls.income.errors?.required">Income is required.</small>
+            <small *ngIf="loanForm.controls.income.errors?.min">Income must be a positive number.</small>
+          </div>
+        </div>
+
+        <div class="mb-2">
+          <label for="model" class="form-label">Model</label>
+          <input type="date" class="form-control" id="model" formControlName="model" required>
+          <div *ngIf="loanForm.controls.model?.invalid && (loanForm.controls.model.dirty || loanForm.controls.model.touched)" class="text-danger">
+            <small *ngIf="loanForm.controls.model.errors?.required">Model is required.</small>
+            <small *ngIf="loanForm.controls.model.errors?.futureDate">Model date cannot be in the future.</small>
+          </div>
+        </div>
+
+        <div class="mb-2">
+          <label for="purchasePrice" class="form-label">Purchase Price</label>
+          <input type="number" class="form-control" id="purchasePrice" formControlName="purchasePrice" required>
+          <div *ngIf="loanForm.controls.purchasePrice?.invalid && (loanForm.controls.purchasePrice.dirty || loanForm.controls.purchasePrice.touched)" class="text-danger">
+            <small *ngIf="loanForm.controls.purchasePrice.errors?.required">Purchase Price is required.</small>
+            <small *ngIf="loanForm.controls.purchasePrice.errors?.min">Purchase Price must be a positive number.</small>
+          </div>
+        </div>
+
+        <div class="mb-2">
+          <label for="address" class="form-label">Address</label>
+          <input type="text" class="form-control" id="address" formControlName="address" required>
+          <div *ngIf="loanForm.controls.address?.invalid && (loanForm.controls.address.dirty || loanForm.controls.address.touched)" class="text-danger">
+            <small *ngIf="loanForm.controls.address.errors?.required">Address is required.</small>
+            <small *ngIf="loanForm.controls.address.errors?.minlength">Address must be at least 10 characters long.</small>
+          </div>
+        </div>
+
+        <div class="mb-2">
+          <label for="proof" class="form-label">Proof of Income</label>
+          <input type="file" class="form-control" id="proof" (change)="onFileChange($event)">
+          <div *ngIf="fileErrorMessage" class="text-danger">
+            <small>{{ fileErrorMessage }}</small>
+          </div>
+        </div>
+
+        <div class="mb-2">
+          <button class="btn btn-primary w-100" [ngClass]="{'btn-success': loanForm.valid, 'btn-primary': !loanForm.valid}" type="submit" [disabled]="loanForm.invalid">Submit</button>
+        </div>
+      </form>
+      <div *ngIf="submitted && loanForm.invalid" class="alert alert-danger mt-3">
+        <small>All fields are required</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap Modal for Confirmation -->
+<div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmationModalLabel">Loan Application Status</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p id="confirmationMessage">Are you sure you want to create this loan?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" (click)="confirmCreateLoan()">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap Modal for Success/Error Messages -->
+<div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="resultModalLabel">Loan Application Status</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p id="resultMessage"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

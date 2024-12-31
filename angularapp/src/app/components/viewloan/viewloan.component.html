@@ -1,0 +1,129 @@
+<div class="background">
+  <div class="container my-4 mt-8">
+    <div class="card shadow p-3 mb-4 bg-white rounded">
+      <div id="headings" class="d-flex justify-content-between align-items-center">
+        <h2 class="my-2">Vehicles Loan</h2> 
+        <input type="text" class="form-control search-input" placeholder="Search.." [(ngModel)]="searchTerm">
+      </div>
+      <div id="table" class="table-responsive">
+        <div *ngIf="loading" class="text-center">
+          <div class="spinner-border text-primary" role="status"> 
+            <span class="visually-hidden">Loading...</span> 
+          </div>
+        </div>
+        <div *ngIf="!loading && allLoans.length === 0" class="text-center">
+          <p>No Records Found</p>
+        </div>
+        <table *ngIf="!loading && allLoans.length > 0" class="table table-sm table-striped table-hover table-bordered">
+          <thead class="thead-dark">
+            <tr id="heading">
+              <th scope="col">S.No</th>
+              <th scope="col">Loan Type</th>
+              <th scope="col">Maximum Amount</th>
+              <th scope="col">Interest Rate</th>
+              <th scope="col" class="description-header">Description</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let loan of allLoans | searchLoan: searchTerm; let i = index">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{ loan.loanType }}</td>
+              <td>{{ loan.maximumAmount | currency }}</td>
+              <td>{{ loan.interestRate }}%</td>
+              <td class="description"> 
+                <span *ngIf="loan.description.length > 50">{{ loan.description | slice:0:50 }}...</span> 
+                <span *ngIf="loan.description.length <= 50">{{ loan.description }}</span> 
+              </td>
+              <td> 
+                <button class="btn btn-primary btn-sm mr-2" (click)="edit(loan.loanId)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                    <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
+                  </svg> 
+                </button> 
+                <button class="btn btn-danger btn-sm mr-2" (click)="showDeleteConfirmation(loan.loanId)"> 
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                    <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
+                  </svg>
+                </button> 
+                <button class="btn btn-secondary btn-sm" (click)="viewFullDescription(loan.loanId)">View Full Description</button> 
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmationModalLabel">Confirm Loan Deletion</h5> 
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this loan?</p>
+      </div>
+      <div class="modal-footer"> 
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" (click)="deleteConfirmed()">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Full Description Modal -->
+<div class="modal fade" id="fullDescriptionModal" tabindex="-1" aria-labelledby="fullDescriptionModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="fullDescriptionModalLabel">Full Description</h5> 
+        <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+      </div>
+      <div class="modal-body">
+        <p>{{ selectedLoanDescription }}</p>
+      </div>
+      <div class="modal-footer"> 
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Error Modal -->
+<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="errorModalLabel">Delete Failed</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>{{ errorMessage }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="successModalLabel">Success</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Loan deleted successfully.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

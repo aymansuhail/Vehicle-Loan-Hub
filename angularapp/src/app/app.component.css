@@ -1,0 +1,33 @@
+.footer {
+    background-color: #343a40;
+    color: white;
+    padding: 2px 0;
+    position: sticky;
+    width: 100%;
+    bottom: 0;
+  }
+  
+  .footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .footer-left {
+    margin-left: 20px;
+  }
+  
+  .footer-right {
+    margin-right: 20px;
+  }
+  
+  .footer-right a {
+    color: #FF725C;
+    text-decoration: none;
+  }
+  
+  .footer-right a:hover {
+    text-decoration: underline;
+  }
+
+  
